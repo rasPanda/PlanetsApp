@@ -31,7 +31,7 @@ namespace PlanetsApp.Views
                     var planet = planets.FirstOrDefault(p => p.Id == inputId);
                     if (planet != null)
                     {
-                        return planet.Id;
+                        return planets.IndexOf(planet);
                     }
                 }
 

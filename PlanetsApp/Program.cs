@@ -15,29 +15,29 @@ class Program
 
         while (true)
         {
-            int selectedIndex = view.GetPlanetSelection(planets);
-            var selectedPlanet = planets[selectedIndex];
-
-            Console.WriteLine($"\nSelected planet: {selectedPlanet.Name}");
-
-            if (selectedPlanet.Residents == null || selectedPlanet.Residents.Length == 0)
-            {
-                Console.WriteLine("This planet has no known residents.");
-            }
-            else
-            {
-                Console.WriteLine("Fetching residents...\n");
-                var residents = await service.GetResidentsAsync(selectedPlanet.Residents);
-                view.DisplayResidents(residents);
-            }
-
-            Console.WriteLine("\nPress Enter to continue or type 'exit' to quit.");
+            Console.WriteLine("\nEnter the ID number of the planet to view its residents (or type 'exit' to quit)");
             var input = Console.ReadLine();
             if (input?.Trim().ToLower() == "exit")
                 break;
 
-            Console.Clear();
-            view.DisplayPlanets(planets);
+            if (!int.TryParse(input, out int inputId))
+            {
+                Console.WriteLine("An ID needs to be a whole number. Try again.");
+                continue;
+            }
+
+            var selectedPlanet = planets.FirstOrDefault(p => p.Id == inputId);
+            if (selectedPlanet == null)
+            {
+                Console.WriteLine("Perhaps the Archives are incomplete. Try again.");
+                continue;
+            }
+
+            Console.WriteLine($"\nSelected planet: {selectedPlanet.Name}");
+
+            Console.WriteLine("Fetching residents...\n");
+            var residents = await service.GetResidentsAsync(selectedPlanet.Residents);
+            view.DisplayResidents(residents);
         }
     }
 }
