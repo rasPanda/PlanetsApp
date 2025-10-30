@@ -10,6 +10,7 @@ namespace PlanetsApp.Views
 {
     public class ConsoleView
     {
+        // view to loop through all fetched planets and log
         public void DisplayPlanets(List<Planet> planets)
         {
             Console.WriteLine("All known planets in the galaxy:");
@@ -20,25 +21,7 @@ namespace PlanetsApp.Views
 
         }
 
-        public int GetPlanetSelection(List<Planet> planets)
-        {
-            Console.WriteLine("Enter the ID number of the planet to view its residents:");
-
-            while (true)
-            {
-                if (int.TryParse(Console.ReadLine(), out int inputId))
-                {
-                    var planet = planets.FirstOrDefault(p => p.Id == inputId);
-                    if (planet != null)
-                    {
-                        return planets.IndexOf(planet);
-                    }
-                }
-
-                Console.WriteLine("Perhaps the Archives are incomplete. Try again with a valid planet ID.");
-            }
-        }
-
+        // view to loop through all residents provided and log
         public void DisplayResidents(List<Person> residents)
         {
             if (residents.Count == 0)

@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace PlanetsApp.Models
 {
+    // simple model for planet
+    // only storing data points required for app, more can be added
     public class Planet
     {
         public int Id { get; set; }
