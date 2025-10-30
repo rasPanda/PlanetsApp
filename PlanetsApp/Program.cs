@@ -7,7 +7,7 @@ class Program
     static async Task Main()
     {
         // init httpClient, service, and views
-        // init httpClient here to avoid creating multiple instances
+        // dependency injection for httpClient
         using var httpClient = new HttpClient();
         var service = new APIService(httpClient);
         var view = new ConsoleView();
